@@ -1,0 +1,625 @@
+\documentclass[12pt]{report}
+
+% Package imports
+\usepackage{graphicx} % For including graphics
+\usepackage{geometry} % For adjusting page margins
+\usepackage{fancyhdr} % For headers and footers
+\usepackage{mdframed} % For creating page borders
+\usepackage{setspace} % For line spacing
+\usepackage{tocloft} % For formatting TOC, LOF, and LOT
+\usepackage{tabularx} % For flexible tables
+\usepackage{float} % For the H option in figure floats
+\usepackage{algorithm} % For algorithms
+\usepackage{algpseudocode} % For the algorithmic environment
+\usepackage{nomencl} % For abbreviations list
+\usepackage{etoolbox} % Needed for \patchcmd
+\usepackage{parskip} % For paragraph spacing
+\usepackage{enumitem} % For customized lists
+\usepackage{hyperref} % For hyperlinks in references
+\usepackage{times} % Times font for professional look
+
+\makenomenclature % Initialize the nomenclature
+
+% Geometry settings
+\geometry{a4paper, left=1.25in, right=1in, top=0.75in, bottom=1.25in}
+
+% Custom page styles
+\fancypagestyle{preliminary}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage} % Center Roman page numbers
+    \setlength{\footskip}{0.75in}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{maincontent}{
+    \fancyhf{} % Clear all header and footer fields
+    % Header
+    \fancyhead[L]{\textbf{Event Management System}} % Left side of header
+    \fancyhead[R]{\textbf{2024-2025}} % Right side of header
+    \renewcommand{\headrulewidth}{1.5pt} % Thickness of header line
+    \renewcommand{\headrule}{%
+        \hrule height 1.5pt % Top border thickness
+        \vspace{1pt} % Small gap
+        \hrule height 0.5pt % Bottom border thickness
+    }
+    % Footer
+    \fancyfoot[L]{\textbf{CSE(IoT, Cyber Security and Blockchain Technology)}} % Left side of footer
+    \fancyfoot[R]{\thepage} % Right side of footer
+    \renewcommand{\footrulewidth}{1.5pt} % Thickness of footer line
+    \renewcommand{\footrule}{%
+        \hrule height 1.5pt % Top border thickness
+        \vspace{1pt} % Small gap
+        \hrule height 0.5pt % Bottom border thickness
+    }
+}
+
+\makeatletter
+\patchcmd{\chapter}
+  {\thispagestyle{plain}} % Replace plain style
+  {\thispagestyle{maincontent}} % Apply the custom style
+  {}{} % Do nothing if the patch fails
+\makeatother
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \begin{mdframed}[linewidth=2pt, skipabove=0pt, skipbelow=0pt, innerleftmargin=10pt, innerrightmargin=10pt, innertopmargin=10pt, innerbottommargin=10pt]
+        \begin{center}
+            % VTU Header
+            \textbf{\fontsize{14pt}{16pt}\selectfont VISVESVARAYA TECHNOLOGICAL UNIVERSITY}\\[0.2cm]
+            \textbf{\fontsize{14pt}{16pt}\selectfont BELAGAVI-590018}\\[0.3cm]
+
+            % VTU Logo
+            \includegraphics[width=0.2\textwidth]{VTU.png}\\[0.3cm]
+
+            % Project Title
+            \textbf{\fontsize{14pt}{16pt}\selectfont DBMS Mini Project Report On}\\[0.3cm]
+            \textbf{\fontsize{14pt}{16pt}\selectfont "Rel-Event: Event Management System"}\\[0.3cm]
+
+            % Submission Details
+            \fontsize{12pt}{14pt}\selectfont Submitted in partial fulfillment of the requirements for the\\
+            \fontsize{12pt}{14pt}\selectfont award of the Degree of\\[0.3cm]
+            \textbf{\fontsize{14pt}{16pt}\selectfont Bachelor of Engineering}\\[0.2cm]
+            \fontsize{12pt}{14pt}\selectfont in\\[0.2cm]
+            \textbf{\fontsize{14pt}{16pt}\selectfont CSE(IoT, Cyber Security and Blockchain Technology)}\\[0.5cm]
+
+            % Submitted By
+            \textbf{\fontsize{12pt}{14pt}\selectfont Submitted by}\\[0.3cm]
+            \begin{tabular}{c c}
+                1BI23IC028& KARAN J MAHANTA\\
+                1BI23IC029& KS UPADHYAYA\\
+                1BI23IC035& OM AGARWALLA\\
+            \end{tabular}\\[0.5cm]
+
+            % Guide Information
+            \textbf{\fontsize{12pt}{14pt}\selectfont Under the guidance of}\\[0.3cm]
+            \textbf{\fontsize{12pt}{14pt}\selectfont Dr. Anupama K.C.}\\
+            \fontsize{12pt}{14pt}\selectfont Associate Professor\\
+            \fontsize{12pt}{14pt}\selectfont CSE(IoT, Cyber Security and Blockchain Technology)\\[0.3cm]
+
+            % College Logo
+            \includegraphics[width=0.2\textwidth]{BITlogo.png}\\[0.3cm]
+
+            % Institute Details
+            \textbf{\fontsize{14pt}{16pt}\selectfont BANGALORE INSTITUTE OF TECHNOLOGY}\\[0.2cm]
+            \fontsize{12pt}{14pt}\selectfont K R Road, V V Pura, Bengaluru-560004\\[0.2cm]
+            \fontsize{10pt}{12pt}\selectfont Affiliated to VTU, Belagavi, Approved by AICTE, Accredited by NBA, NAAC\\[0.3cm]
+
+            \textbf{\fontsize{12pt}{14pt}\selectfont 2024-2025}
+        \end{center}
+    \end{mdframed}
+\end{titlepage}
+
+% Start Roman numbering for preliminary pages
+\pagenumbering{roman}
+\pagestyle{preliminary}
+\setcounter{page}{1}
+
+% Certificate
+\addcontentsline{toc}{chapter}{Certificate}
+\begin{center}
+    {\large\textbf{BANGALORE INSTITUTE OF TECHNOLOGY}}\\[0.2cm]
+    {\fontsize{12pt}{14pt}\selectfont\textbf{CSE(IoT, Cyber Security and Blockchain Technology)}}\\
+    {\fontsize{12pt}{14pt}\selectfont K R Road, V V Pura, Bengaluru-560004.}\\[0.5cm]
+    \includegraphics[width=1.5in,height=1.5in,keepaspectratio]{BITlogo.png}
+\end{center}
+
+\begin{center}
+    \vspace{0.1in}
+    \bfseries\LARGE{CERTIFICATE}
+\end{center}
+\vspace{0.2in}
+
+\begin{spacing}{1.25}
+    \normalfont
+    \noindent
+    This is to certify that the Project entitled \textbf{"Event Management System"} is carried out by
+    \textbf{Karan Jyoti Mahanta (1BI23IC028), Kumarsambhav Upadhyaya (1BI23IC029), Om Agarwalla (1BI23IC035), }, bonafide students of Bangalore Institute of Technology, Bengaluru, in partial fulfilment of the requirements for the award of Bachelor of Engineering in CSE(IoT, Cyber Security and Blockchain Technology). This fulfils all the requirements of the regulations for the award of the degree. The contents of this report have not been submitted to any other institute or university for the award of any degree or diploma and are not a repetition of the work carried out by others.
+\end{spacing}
+
+\begin{center}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}c c}
+        \textbf{Dr. Anupama K.C.} & \textbf{Dr. Shivakumar B.R.} \\
+        \fontsize{10}{12}\selectfont Project Guide \& Associate Professor &
+        \fontsize{10}{12}\selectfont HOD \\
+        \fontsize{10}{12}\selectfont CSE(ICB) & 
+        \fontsize{10}{12}\selectfont CSE(ICB) \\
+        \fontsize{10}{12}\selectfont BIT, Bengaluru & 
+        \fontsize{10}{12}\selectfont BIT, Bengaluru \\
+    \end{tabular*}
+\end{center}
+
+\begin{center}
+    \textbf{Dr. Aswath M U} \\
+    \fontsize{10}{12}\selectfont Principal \\
+    BIT, Bengaluru \\
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{center}
+    \textbf{\large{\underline{Project Final Viva Voce Examination}}}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{center}
+    \begin{tabular}{|m{2.5cm}|m{10cm}|}
+        \hline
+        \textbf{Examiners} & \textbf{Signature with Date} \\\hline
+        \textbf{Examiner 1} & \rule{0pt}{0.75cm} \\\hline
+        \textbf{Examiner 2} & \rule{0pt}{0.75cm} \\\hline
+    \end{tabular}
+\end{center}
+
+% Declaration
+\newpage
+\addcontentsline{toc}{chapter}{Declaration}
+\begin{center}
+    {\large\textbf{BANGALORE INSTITUTE OF TECHNOLOGY}}\\[0.2cm]
+    {\fontsize{12pt}{14pt}\selectfont\textbf{CSE(IoT, Cyber Security and Blockchain Technology)}}\\
+    {\fontsize{12pt}{14pt}\selectfont K R Road, V V Pura, Bengaluru-560004.}\\[0.5cm]
+    \includegraphics[width=1.5in,height=1.5in,keepaspectratio]{BITlogo.png}
+\end{center}
+
+\begin{center}
+    \vspace{0.1in}
+    \bfseries\LARGE{DECLARATION}
+\end{center}
+\vspace{0.2in}
+
+\begin{spacing}{1.25}
+    \normalfont
+    \noindent
+    We hereby declare that the work embodied in this project report titled \textbf{"Event Management system"} is the result of original work carried out by \textbf{Karan Jyoti Mahanta (1BI23IC028), Kumarsambhav Upadhyaya (1BI23IC029), Om Agarwalla (1BI23IC035))} at Bangalore Institute of Technology, Department of CSE(IoT, Cyber Security and Blockchain Technology), Bengaluru-560004, under the guidance of \textbf{Dr. Anupama K.C.}.
+
+    \vspace{1.25cm}
+
+    \begin{tabular}{|c|c|m{8cm}|}
+        \hline
+        \textbf{USN} & \textbf{Name} & \textbf{Student Signature with Date} \\ \hline
+        1BI23IC028 & Karan J M & \\ \hline
+        1BI23IC029 & Kumarsambhav Upadhyaya. & \\ \hline
+        1BI23IC035 & Om Agarwalla \\ \hline
+    \end{tabular}
+\end{spacing}
+
+% Acknowledgements
+\newpage
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\begin{center}
+    \vspace{0.2in}
+    \bfseries\LARGE{ACKNOWLEDGEMENT}
+\end{center}
+\vspace{0.2in}
+
+\begin{spacing}{1.25}
+    First and foremost, We would like to extend my deepest gratitude to my project guide, \textbf{Dr. Anupama K.C.}, Associate Professor, Department of CSE(ICB), BIT, Bengaluru. Her unwavering technical expertise, insightful guidance, and moral encouragement have been pivotal in navigating the challenges and achieving the objectives of this project. Her mentorship has left an indelible mark on our academic and personal growth.\\
+    We are profoundly grateful to \textbf{Dr. Aswath M.U}, Principal of BIT, for fostering an environment of academic excellence and innovation. We also extend my sincere appreciation to \textbf{Dr. Shivakumar B.R.}, HOD of the Department of CSE(ICB), for his leadership and constant encouragement throughout the course of this work. Our heartfelt thanks go to the faculty and staff of the Department of CSE(ICB), whose support and resources have played a crucial role in facilitating this project.\\
+    On a personal note, We owe our heartfelt gratitude to our parents for their unconditional love, sacrifices, and unwavering belief in our capabilities. Their encouragement has been the cornerstone for our perseverance and success.\\
+    Lastly, We extend our sincere thanks to our friends, peers, and all those who contributed directly or indirectly to the successful completion of this project. Your camaraderie, insights, and encouragement have been a source of motivation throughout this journey.
+
+    \begin{flushright}
+        \begin{tabular}{c c}
+            1BI23IC028 & Karan J M  & \\
+            1BI23IC029 & Kumarsambhav Upadhyaya. & \\
+            1BI23IC035 & Om Agarwalla\\
+        \end{tabular}
+    \end{flushright}
+\end{spacing}
+
+% Table of Contents
+\newpage
+\tableofcontents
+
+% Start Arabic numbering for main content
+\newpage
+\pagenumbering{arabic}
+\pagestyle{maincontent}
+
+% Abstract
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+The advancement of digital technologies has transformed how events are planned, managed, and attended, leading to a growing reliance on online platforms for event organization. In contexts where physical coordination is challenging—such as during large-scale events or health emergencies—the need for efficient and accessible digital solutions becomes paramount. This project introduces the design and development of a SQL-based Event Management System aimed at supporting small to medium-sized event organizers.
+
+The system prioritizes functionality, user experience, and data consistency. It enables streamlined management of event details, registrations, ticketing, and user communications. A MySQL database serves as the core, managing information related to events, attendees, schedules, and bookings. The frontend is built using HTML and CSS for layout and presentation, while PHP manages server-side processing and database interactions. JavaScript is employed to enhance responsiveness and improve user engagement.
+
+This project showcases how open-source web technologies can be leveraged to create a cost-effective, scalable, and customizable event management platform, empowering organizers with a strong digital toolset. Future iterations may evolve this system into a fully integrated solution suitable for commercial deployment.
+% Chapter 1: Introduction
+\chapter{Introduction}
+\section{Background}
+Event management systems have become essential tools for organizing and coordinating various types of events, ranging from corporate meetings to social gatherings. These systems help in planning, scheduling, registration, and communication, offering a centralized platform for all event-related activities.
+
+Technological advances have enabled web-based solutions to replace manual or paper-based event planning. A good event management system enhances efficiency, user experience, and data security.
+
+\section{Project Objective}
+The main goal of this project is to design and implement a secure and efficient Event Management System using HTML, CSS, Python (Flask), and MySQL. The system should:
+\begin{itemize}
+    \item Allow users to browse and register for events.
+    \item Enable administrators to create, update, and manage events.
+    \item Store and manage event and user data securely.
+    \item Demonstrate core event management functionality in a prototype format.
+\end{itemize}
+
+\section{Technologies Used}
+\begin{itemize}
+    \item \textbf{Frontend}: HTML, CSS
+    \item \textbf{Backend}: Python (Flask)
+    \item \textbf{Database}: MySQL
+    \item \textbf{Development Environment}: XAMPP (for MySQL), Flask (Python web framework)
+\end{itemize}
+
+\section{Scope}
+This system is targeted at small to medium-sized organizations seeking an easy-to-use and cost-effective event management solution. While the project represents a prototype, the system architecture supports future additions such as payment integrations, mobile support, and real-time notifications.
+
+% Chapter 2: Problem Statement
+\chapter{Problem Statement}
+\section{Traditional Limitations}
+Organizing events manually often leads to:
+\begin{itemize}
+    \item Inefficient communication and scheduling
+    \item Higher risk of data loss or duplication
+    \item Inaccessibility for remote participants
+\end{itemize}
+
+\section{Challenges with Existing Solutions}
+Existing digital platforms may:
+\begin{itemize}
+    \item Be costly for small organizations
+    \item Require technical know-how for setup and maintenance
+    \item Lack flexible and customizable features
+\end{itemize}
+
+\section{Identified Problems}
+\begin{itemize}
+    \item Lack of affordable, customizable tools for event coordination
+    \item Poor data integration between different event components
+    \item No centralized interface for event management
+\end{itemize}
+
+\section{Project Solution}
+This system addresses the above issues by:
+\begin{itemize}
+    \item Providing a unified platform for users and administrators
+    \item Offering secure backend management using Flask and MySQL
+    \item Supporting essential functions like event listing, registration, and updates
+\end{itemize}
+
+% Chapter 3: Frontend
+\chapter{Frontend}
+\section{Overview}
+The frontend ensures users can interact with the system efficiently and intuitively.
+
+\section{HTML}
+HTML is used for:
+\begin{itemize}
+    \item Displaying event listings and details
+    \item Creating registration and login forms
+    \item Structuring admin dashboard and content areas
+\end{itemize}
+
+\section{CSS}
+CSS enhances UI/UX with:
+\begin{itemize}
+    \item Responsive layouts using Flexbox and Grid
+    \item Consistent styling for buttons, forms, and cards
+    \item Visual feedback with transitions and hover effects
+\end{itemize}
+
+\section{User Interface Design}
+UI design focuses on:
+\begin{itemize}
+    \item Simplicity and ease of use
+    \item Mobile-first responsiveness
+    \item Accessibility and visual clarity
+\end{itemize}
+
+% Chapter 4: Backend
+\chapter{Backend}
+\section{Overview}
+The backend processes user requests, manages data, and serves dynamic content.
+
+\section{Python (Flask)}
+Flask routes and controllers:
+\begin{itemize}
+    \item Handle event creation, update, and deletion
+    \item Authenticate users (login, register)
+    \item Process event registrations
+    \item Secure endpoints using validation and session management
+\end{itemize}
+
+\section{MySQL Database}
+\subsection{Key Tables}
+\begin{itemize}
+    \item \textbf{users}: Stores user credentials and roles
+    \item \textbf{events}: Contains event metadata (title, description, time, location)
+    \item \textbf{registrations}: Links users to registered events
+\end{itemize}
+
+\subsection{SQL Features Used}
+\begin{itemize}
+    \item FOREIGN KEY constraints for data integrity
+    \item JOINs to link events and registrations
+    \item VIEWS for summary statistics (e.g., total registrations)
+    \item INDEXES for efficient query performance
+\end{itemize}
+
+\section{Local Server Setup}
+\begin{itemize}
+    \item Flask serves as the web server
+    \item MySQL (via XAMPP) handles database operations
+    \item Routes and templates connect frontend and backend
+\end{itemize}
+
+% Chapter 5: System Requirements
+\chapter{System Requirements}
+\section{Hardware Requirements}
+\begin{tabular}{|l|l|}
+    \hline
+    \textbf{Component} & \textbf{Minimum Specification} \\
+    \hline
+    RAM & 4 GB \\
+    Processor & 2.0 GHz Dual-core \\
+    Hard Disk & 10 GB of free space \\
+    Display & 1024x768 resolution \\
+    \hline
+\end{tabular}
+
+\section{Software Requirements}
+\begin{tabular}{|l|l|}
+    \hline
+    \textbf{Software} & \textbf{Version/Details} \\
+    \hline
+    Operating System & Windows 10/Linux/macOS \\
+    Python & Version 3.8 or above \\
+    Flask & Latest stable version \\
+    MySQL & Community Edition (via XAMPP) \\
+    Web Browser & Google Chrome / Mozilla Firefox \\
+    Code Editor & Visual Studio Code / Sublime Text \\
+    \hline
+\end{tabular}
+
+% Chapter 6: ER Diagram
+\chapter{ER Diagram}
+The ER Diagram shows the relationships among Users, Events, and Registrations. It ensures logical data flow and integrity.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{new.jpg}
+    \caption{ER Diagram}
+    \label{fig:homepage}
+\end{figure}
+
+% Chapter 7: Schema Diagram
+\chapter{Schema Diagram}
+This chapter outlines the MySQL database schema, including field types, primary and foreign keys.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{schema.jpg}
+    \caption{Schema Diagram}
+    \label{fig:homepage}
+\end{figure}
+
+\chapter{Normalization}
+Normalization is a database design technique used to organize data in a relational database to eliminate redundancy, improve data integrity, and ensure data is stored efficiently. It involves structuring tables and their relationships to meet certain rules, defined in normal forms (1NF, 2NF, 3NF, etc.).
+
+\section{Normal Forms}
+The following are key normal forms used in database normalization:
+\begin{itemize}
+  \item \textbf{1NF (First Normal Form)}: Ensures all columns contain atomic values, no repeating groups, and each row is uniquely identifiable by a primary key.
+  \item \textbf{2NF (Second Normal Form)}: Builds on 1NF, requiring all non-key attributes to fully depend on the entire primary key, eliminating partial dependencies.
+  \item \textbf{3NF (Third Normal Form)}: Extends 2NF, removing transitive dependencies so non-key attributes depend only on the primary key, not other non-key attributes.
+\end{itemize}
+
+\subsection{First Normal Form (1NF)}
+\textbf{Definition:} A table is in 1NF if:
+\begin{itemize}
+  \item All attributes contain only atomic (indivisible) values.
+  \item There are no repeating groups or arrays in any column.
+  \item Each column has a unique name, and each row is uniquely identifiable (usually via a primary key).
+\end{itemize}
+\textbf{Purpose:} Eliminates duplicate data and ensures each column holds a single value.
+
+\textbf{Example in the onlineshop Database:} The user info table is in 1NF because:
+\begin{itemize}
+  \item Each column (user id, first name, last name, email, etc.) contains atomic values.
+  \item The table has a primary key (user id), ensuring each row is unique.
+  \item There are no repeating groups.
+\end{itemize}
+\textbf{Potential Violation:} If the address1 column in user info stored multiple addresses (e.g., \texttt{"123 Main St, 456 Oak St"}), it would violate 1NF. To fix this, create a separate table for addresses linked by user id.
+
+\textbf{Check:} All tables in the provided schema appear to be in 1NF.
+
+\subsection{Second Normal Form (2NF)}
+\textbf{Definition:} A table is in 2NF if:
+\begin{itemize}
+  \item It is already in 1NF.
+  \item All non-key attributes are fully functionally dependent on the entire primary key (no partial dependency).
+\end{itemize}
+\textbf{Purpose:} Removes partial dependencies.
+
+\textbf{Example:} Order products table:
+\begin{itemize}
+  \item Primary key: \texttt{order\_pro\_id} (or composite of \texttt{order\_id} and \texttt{product\_id}).
+  \item Attributes: \texttt{order\_id}, \texttt{product\_id}, \texttt{qty}, \texttt{amt}.
+\end{itemize}
+\texttt{amt} depends on both \texttt{order\_id} and \texttt{product\_id}, satisfying 2NF.
+
+\textbf{Potential Violation:} Including \texttt{product\_title} (depends only on \texttt{product\_id}) would violate 2NF. It should remain in the products table.
+
+\textbf{Check:} The order products table is in 2NF. Other tables like products also meet 2NF.
+
+\subsection{Third Normal Form (3NF)}
+\textbf{Definition:} A table is in 3NF if:
+\begin{itemize}
+  \item It is already in 2NF.
+  \item There are no transitive dependencies.
+\end{itemize}
+\textbf{Purpose:} Eliminates transitive dependencies and ensures non-key attributes depend only on the primary key.
+
+\textbf{Example:} Orders info table:
+\begin{itemize}
+  \item Primary key: \texttt{order\_id}
+  \item Attributes: \texttt{user\_id}, \texttt{f\_name}, \texttt{email}, \texttt{address}, \texttt{city}, \texttt{state}, \texttt{zip}, \texttt{cardname}, \texttt{cardnumber}, \texttt{expdate}, \texttt{prod\_count}, \texttt{total\_amt}, \texttt{cvv}
+\end{itemize}
+\textbf{Violation:} \texttt{f\_name} and \texttt{email} depend on \texttt{user\_id}, not \texttt{order\_id}. This is a transitive dependency.
+
+\textbf{Fix:} Remove \texttt{f\_name} and \texttt{email} from orders info. Use a JOIN on \texttt{user\_id} to retrieve this data from the user info table.
+
+\textbf{Other Example:} Products table is in 3NF since attributes depend directly on \texttt{product\_id}.
+
+\textbf{Check:} Most tables satisfy 3NF, but orders info violates it.
+
+\subsection{Summary of Normalization in the Onlineshop Database}
+\begin{itemize}
+  \item \textbf{1NF:} All tables have atomic values and primary keys.
+  \item \textbf{2NF:} No partial dependencies.
+  \item \textbf{3NF:} All tables except orders info meet this form.
+\end{itemize}
+
+\subsection{Benefits of Normalization}
+\begin{itemize}
+  \item Reduces data redundancy.
+  \item Improves data integrity.
+  \item Enhances query efficiency and consistency.
+\end{itemize}
+
+
+% Chapter 8: Implementation
+\chapter{Implementation}
+Key implementation steps:
+\begin{itemize}
+    \item \textbf{Database Setup}: Create Events, Register, SQL View and SQL Trigger
+    \item \textbf{Backend Development}: Implement Flask routes and logic.
+    \item \textbf{Frontend Development}: Build user interfaces with HTML/CSS.
+    \item \textbf{Integration}: Connect templates with Flask backend.
+    \item \textbf{Testing}: Run the app locally and test features.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{t1.jpg}
+    \caption{trigger for logging}
+    \label{fig:homepage}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{t2.jpg}
+    \caption{trigger for eventlog}
+    \label{fig:homepage}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{v1.jpg}
+    \caption{view events}
+    \label{fig:homepage}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{register.jpg}
+    \caption{register}
+    \label{fig:homepage}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{create.jpg}
+    \caption{create event}
+    \label{fig:homepage}
+\end{figure}
+
+% Chapter 9: Testing
+\chapter{Testing}
+The system was tested for:
+\begin{itemize}
+    \item User registration and login
+    \item Event creation and update
+    \item Event registration
+    \item Admin dashboard functionality
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{reguser.png}
+    \caption{Register as a New User}
+    \label{fig:homepage}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{login.png}
+    \caption{Login with User ID}
+    \label{fig:homepage}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{crevent.png}
+    \caption{create event}
+    \label{fig:homepage}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{account.png}
+    \caption{My Events}
+    \label{fig:homepage}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{admin.png}
+    \caption{Admin Panel}
+    \label{fig:homepage}
+\end{figure}
+
+
+
+
+
+% Chapter 10: Conclusion
+\chapter{Conclusion}
+The Event Management System provides an efficient and scalable solution for event planning and coordination. By integrating Flask, HTML/CSS, and MySQL, it offers secure user and data handling with a clean UI and modular backend.
+
+% Chapter 11: Future Enhancements
+\chapter{Future Enhancements}
+\begin{itemize}
+    \item \textbf{Payment Integration}: Include online payment gateways.
+    \item \textbf{Mobile App}: Build a native or hybrid app.
+    \item \textbf{Event Analytics}: Add dashboards for insights.
+    \item \textbf{Email/SMS Notifications}: Notify users of updates.
+    \item \textbf{Multi-language Support}: Make system globally usable.
+\end{itemize}
+
+% Chapter 12: References
+\chapter{References}
+\begin{itemize}
+    \item Flask Documentation: \url{https://flask.palletsprojects.com/}
+    \item MySQL Documentation: \url{https://dev.mysql.com/doc/}
+    \item Mozilla Developer Network: \url{https://developer.mozilla.org/}
+    \item Python Official Docs: \url{https://docs.python.org/3/}
+\end{itemize}
+
+\end{document}
